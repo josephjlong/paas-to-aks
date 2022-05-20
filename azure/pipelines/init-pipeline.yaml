@@ -30,7 +30,7 @@ stages:
       dependsOn: Build
       pool:
         vmImage: windows-latest
-      # environment: $(deploymentId)
+      environment: $(deploymentId)
       strategy:
         runOnce:
           deploy:
