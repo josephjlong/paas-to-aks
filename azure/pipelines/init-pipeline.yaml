@@ -2,8 +2,8 @@ name: $(Date:dd.MM.yyyy)$(rev:.r)
 trigger: none
 pr: none
 
-variables:
-- group: 'paas-to-aks'
+# variables:
+# - group: 'paas-to-aks'
 
 stages:
   - stage: InitDeploy
@@ -30,23 +30,23 @@ stages:
       dependsOn: Build
       pool:
         vmImage: windows-latest
-      environment: $(deploymentId)
+      # environment: $(deploymentId)
       strategy:
         runOnce:
           deploy:
             steps:
             - download: current
               artifact: Azure
-            - task: AzureResourceManagerTemplateDeployment@3
-              displayName: 'Deploy VNET'
-              inputs:
-                azureResourceManagerConnection: '$(azureServiceConnection)'
-                subscriptionId: '$(azureSubscriptionId)'
-                resourceGroupName: '$(resourceGroupName)'
-                location: '$(location)'
-                csmFile: '$(Pipeline.Workspace)/Azure/templates/vnet/deploy-vnet.json'
-                overrideParameters: '-deploymentId "$(deploymentId)"'
-                deploymentName: VNET
+            # - task: AzureResourceManagerTemplateDeployment@3
+            #   displayName: 'Deploy VNET'
+            #   inputs:
+            #     azureResourceManagerConnection: '$(azureServiceConnection)'
+            #     subscriptionId: '$(azureSubscriptionId)'
+            #     resourceGroupName: '$(resourceGroupName)'
+            #     location: '$(location)'
+            #     csmFile: '$(Pipeline.Workspace)/Azure/templates/vnet/deploy-vnet.json'
+            #     overrideParameters: '-deploymentId "$(deploymentId)"'
+            #     deploymentName: VNET
 
             # - task: AzureResourceManagerTemplateDeployment@3
             #   displayName: 'Deploy Container Registry'
