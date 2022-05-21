@@ -2,8 +2,8 @@ name: $(Date:dd.MM.yyyy)$(rev:.r)
 trigger: none
 pr: none
 
-# variables:
-# - group: 'paas-to-aks'
+variables:
+- group: 'paas-to-aks'
 
 stages:
   - stage: InitDeploy
@@ -19,11 +19,11 @@ stages:
           inputs:
             targetPath: '$(System.DefaultWorkingDirectory)/azure'
             artifactName: Azure
-        # - task: PublishPipelineArtifact@1
-        #   displayName: 🚢 Publish Kubernetes Artifact
-        #   inputs:
-        #     targetPath: '$(System.DefaultWorkingDirectory)/sitecore/k8s'
-        #     artifactName: Kubernetes
+        - task: PublishPipelineArtifact@1
+          displayName: 🚢 Publish Kubernetes Artifact
+          inputs:
+            targetPath: '$(System.DefaultWorkingDirectory)/sitecore/k8s'
+            artifactName: Kubernetes
 
     - deployment: DeployEDS
       displayName: Deploy external data services
